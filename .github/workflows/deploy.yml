@@ -17,8 +17,15 @@ jobs:
       - name: Kiem tra file index.html
         run: |
           test -f site/index.html
-          grep -q "Nguyễn Hoàng Anh Khoa" site/index.html && echo "CANH BAO: Chua thay ten!" && exit 1 || echo "OK: Da dien thong tin ca nhan"
-
+          if grep -q "Nguyễn Hoàng Anh Khoa" site/index.html; then
+            echo "CANH BAO: Chua thay ten!"
+            exit 1
+          fi
+          if grep -q "233404050178" site/index.html; then
+            echo "CANH BAO: Chua thay ma sinh vien!"
+            exit 1
+          fi
+          echo "OK: Da dien thong tin ca nhan"
       - name: Cau hinh AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
