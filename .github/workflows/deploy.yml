@@ -14,6 +14,7 @@ jobs:
       - name: Lay code tu repository
         uses: actions/checkout@v4
 
+      
       - name: Kiem tra file index.html
         run: |
           test -f site/index.html
@@ -25,7 +26,12 @@ jobs:
             echo "CANH BAO: Chua thay ma sinh vien!"
             exit 1
           fi
-          echo "OK: Da dien thong tin ca nhan"
+          if grep -q "Nguyễn Hoàng Anh Khoa" site/index.html && grep -q "233404050178" site/index.html; then
+            echo "OK: Da dien dung thong tin ca nhan"
+          else
+            echo "CANH BAO: Kiem tra lai ten va MSSV!"
+            exit 1
+          fi
 
       - name: Cau hinh AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
