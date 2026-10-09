@@ -1,38 +1,45 @@
 
-name: Deploy website len S3
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CI/CD Demo - DTDM1222H</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 640px;
+      margin: 60px auto;
+      padding: 0 16px;
+    }
 
-on:
-  push:
-    branches:
-      - main
+    .banner {
+      background: #1F4E79;
+      color: white;
+      padding: 24px;
+      border-radius: 10px;
+      text-align: center;
+    }
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+    .info {
+      background: #E2EFDA;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <h1>Website triển khai tự động bằng CI/CD</h1>
+    <p>Phiên bản: v1</p>
+  </div>
 
-    steps:
-      - name: Lay code tu repository
-        uses: actions/checkout@v4
-
-      
-      - name: Kiem tra file index.html
-        run: |
-          test -f site/index.html
-          if grep -q "Nguyễn Hoàng Anh Khoa" site/index.html; then
-            echo "CANH BAO: Chua thay ten!"
-            exit 1
-          fi
-          if grep -q "233404050178" site/index.html; then
-            echo "CANH BAO: Chua thay ma sinh vien!"
-            exit 1
-          fi
-          echo "OK: Da dien thong tin ca nhan"
-      - name: Cau hinh AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-1
-
-      - name: Deploy len S3
-        run: aws s3 sync site/ s3://cicd-web-nguyenhoanganhkhoa-2025/ --delete
+  <div class="info">
+    <p><b>Sinh viên:</b> Nguyễn Hoàng Anh Khoa</p>
+    <p><b>MSSV:</b> 233404050178</p>
+    <p><b>Pipeline:</b> GitHub Actions → Amazon S3</p>
+    <p><b>Môn học:</b> Điện toán đám mây - DTDM1222H</p>
+  </div>
+</body>
+</html>
