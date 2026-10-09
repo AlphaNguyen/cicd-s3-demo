@@ -14,14 +14,15 @@ jobs:
       - name: Lay code tu repository
         uses: actions/checkout@v4
 
+      
       - name: Kiem tra file index.html
         run: |
           test -f site/index.html
-          if grep -q "Nguyễn Hoàng Anh Khoa" site/index.html; then
+          if grep -q "TEN_CUA_BAN" site/index.html; then
             echo "CANH BAO: Chua thay ten!"
             exit 1
           fi
-          if grep -q "233404050178" site/index.html; then
+          if grep -q "MA_SINH_VIEN" site/index.html; then
             echo "CANH BAO: Chua thay ma sinh vien!"
             exit 1
           fi
